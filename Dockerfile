@@ -34,6 +34,9 @@ RUN  git clone https://github.com/protocolbuffers/protobuf.git && \
     make install  && \
     ldconfig
 
+RUN apt-get install -y python-setuptools
+RUN cd protobuf/python; python setup.py install
+
 # Install golang
 ENV GOLANG_VERSION 1.8.1
 RUN wget -O - https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-amd64.tar.gz \

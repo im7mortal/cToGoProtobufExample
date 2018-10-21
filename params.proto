@@ -1,10 +1,11 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package exportParams;
 
 message ExportParams {
-  optional int32 IntVal = 1;
-  optional float FloatVal = 2;
+  int32 IntVal = 1;
+  float FloatVal = 2;
 
+  repeated string ArrayOfStrings = 3;
   repeated float ArrayOfData = 4 [packed=true];
 }
