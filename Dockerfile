@@ -47,6 +47,9 @@ WORKDIR /go/src/github.com/im7mortal/cToGoProtobufExample
 
 COPY . .
 
+# Remove all protobuf files from host
+RUN find . -name "*.pb.*" -type f -delete
+
 # Generate CPP
 RUN protoc --cpp_out=src/. params.proto && mv src/params.pb.h include/params.pb.h
 
