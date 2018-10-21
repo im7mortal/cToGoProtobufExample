@@ -8,7 +8,7 @@ int main()
     // Get message
     unsigned long n = getData(buffer);
     // Send message
-    sendData(buffer, n);
+    sendData(buffer);
     // Free array
     free(buffer);
     return 0;

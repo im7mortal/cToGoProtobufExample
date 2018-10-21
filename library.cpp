@@ -40,7 +40,7 @@ unsigned long getData(char *data) {
 
     return bytes.size();
 }
-void sendData(char *data, unsigned long n) {
+void sendData(char *data) {
 
     exportParams::ExportParams ex;
     std::string bytes(data);

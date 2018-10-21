@@ -4,6 +4,6 @@
 #include <params.pb.h>
 extern "C" {
 unsigned long getData(char *data);
-void sendData(char *data, unsigned long n);
+void sendData(char *data);
 }
 #endif
