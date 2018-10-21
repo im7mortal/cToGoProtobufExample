@@ -19,4 +19,11 @@ func main() {
 		fmt.Printf("%f\n", i)
 	}
 
+	e.ArrayOfData = []float32{
+		19.09, 0.3587,
+	}
+
+    println("SEND TO CPP")
+	lib.Send(context.TODO(), e)
+
 }

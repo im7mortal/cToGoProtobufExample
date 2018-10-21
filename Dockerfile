@@ -60,7 +60,6 @@ RUN cp libprotobufExample.a pkg/lib/. && cp include/library.h pkg/lib/.
 
 #RUN mkdir pkg/exportParams
 RUN protoc --go_out=pkg/exportParams/. params.proto
-RUN ls -l /go/src/github.com/im7mortal/cToGoProtobufExample/pkg/lib/
 RUN go install github.com/im7mortal/cToGoProtobufExample/cmd/protobuf
 
 RUN protobuf

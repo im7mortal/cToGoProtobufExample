@@ -37,3 +37,23 @@ func Get(ctx context.Context) (e exportParams.ExportParams, err error) {
 	return
 
 }
+
+// ctx?  just keep it!!!
+func Send(ctx context.Context, e exportParams.ExportParams) (err error) {
+	// Allocate array where C++ will put a descriptor
+	buffer := []byte{}
+
+	// Marshal
+	buffer, err = e.XXX_Marshal(buffer, true)
+	if err != nil {
+		println(err.Error())
+		return
+	}
+
+	// Pointer to response array in C format
+	data := (*C.char)(unsafe.Pointer(&buffer[0]))
+	// Send data to C++
+	C.sendData(data)
+	return
+
+}

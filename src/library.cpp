@@ -45,8 +45,12 @@ void sendData(char *data) {
     exportParams::ExportParams ex;
     std::string bytes(data);
     ex.ParseFromString(bytes);
-    std::cout << "IntVal " << ex.intval() << "\n";
-    std::cout << "FloatVal " << ex.floatval() << "\n";
+    std::cerr << "IntVal " << ex.intval() << "\n";
+    std::cerr << "FloatVal " << ex.floatval() << "\n";
+
+    for (auto i = 0; i < ex.arrayofdata_size(); i++){
+        std::cerr << "ArrayOfData " << ex.arrayofdata(i) << "\n";
+    }
 }
 }
 
