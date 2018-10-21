@@ -37,11 +37,16 @@ unsigned long getData(char *data) {
     for (auto i = 0; i < bytes.size(); i++){
         data[i] = array[i];
     }
-    std::cout << "Hello, World!11dd " << bytes.size() << "\n";
 
     return bytes.size();
 }
 void sendData(char *data, unsigned long n) {
+
+    exportParams::ExportParams ex;
+    std::string bytes(data);
+    ex.ParseFromString(bytes);
+    std::cout << "IntVal " << ex.intval() << "\n";
+    std::cout << "FloatVal " << ex.floatval() << "\n";
 }
 }
 
