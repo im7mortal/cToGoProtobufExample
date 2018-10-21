@@ -85,6 +85,13 @@ class ExportParams : public ::google::protobuf::Message /* @@protoc_insertion_po
     return *this;
   }
   #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
   static const ::google::protobuf::Descriptor* descriptor();
   static const ExportParams& default_instance();
 
@@ -158,13 +165,15 @@ class ExportParams : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::google::protobuf::RepeatedField< float >*
       mutable_arrayofdata();
 
-  // int32 IntVal = 1;
+  // optional int32 IntVal = 1;
+  bool has_intval() const;
   void clear_intval();
   static const int kIntValFieldNumber = 1;
   ::google::protobuf::int32 intval() const;
   void set_intval(::google::protobuf::int32 value);
 
-  // float FloatVal = 2;
+  // optional float FloatVal = 2;
+  bool has_floatval() const;
   void clear_floatval();
   static const int kFloatValFieldNumber = 2;
   float floatval() const;
@@ -172,13 +181,18 @@ class ExportParams : public ::google::protobuf::Message /* @@protoc_insertion_po
 
   // @@protoc_insertion_point(class_scope:exportParams.ExportParams)
  private:
+  void set_has_intval();
+  void clear_has_intval();
+  void set_has_floatval();
+  void clear_has_floatval();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
   ::google::protobuf::RepeatedField< float > arrayofdata_;
   mutable int _arrayofdata_cached_byte_size_;
   ::google::protobuf::int32 intval_;
   float floatval_;
-  mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_params_2eproto::TableStruct;
 };
 // ===================================================================
@@ -192,30 +206,50 @@ class ExportParams : public ::google::protobuf::Message /* @@protoc_insertion_po
 #endif  // __GNUC__
 // ExportParams
 
-// int32 IntVal = 1;
+// optional int32 IntVal = 1;
+inline bool ExportParams::has_intval() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ExportParams::set_has_intval() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ExportParams::clear_has_intval() {
+  _has_bits_[0] &= ~0x00000001u;
+}
 inline void ExportParams::clear_intval() {
   intval_ = 0;
+  clear_has_intval();
 }
 inline ::google::protobuf::int32 ExportParams::intval() const {
   // @@protoc_insertion_point(field_get:exportParams.ExportParams.IntVal)
   return intval_;
 }
 inline void ExportParams::set_intval(::google::protobuf::int32 value) {
-  
+  set_has_intval();
   intval_ = value;
   // @@protoc_insertion_point(field_set:exportParams.ExportParams.IntVal)
 }
 
-// float FloatVal = 2;
+// optional float FloatVal = 2;
+inline bool ExportParams::has_floatval() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ExportParams::set_has_floatval() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ExportParams::clear_has_floatval() {
+  _has_bits_[0] &= ~0x00000002u;
+}
 inline void ExportParams::clear_floatval() {
   floatval_ = 0;
+  clear_has_floatval();
 }
 inline float ExportParams::floatval() const {
   // @@protoc_insertion_point(field_get:exportParams.ExportParams.FloatVal)
   return floatval_;
 }
 inline void ExportParams::set_floatval(float value) {
-  
+  set_has_floatval();
   floatval_ = value;
   // @@protoc_insertion_point(field_set:exportParams.ExportParams.FloatVal)
 }

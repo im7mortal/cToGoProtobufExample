@@ -48,7 +48,7 @@ void InitDefaults() {
 ::google::protobuf::Metadata file_level_metadata[1];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::exportParams::ExportParams, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::exportParams::ExportParams, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -56,9 +56,12 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::exportParams::ExportParams, intval_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::exportParams::ExportParams, floatval_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::exportParams::ExportParams, arrayofdata_),
+  0,
+  1,
+  ~0u,
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, sizeof(::exportParams::ExportParams)},
+  { 0, 8, sizeof(::exportParams::ExportParams)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -88,10 +91,10 @@ void AddDescriptorsImpl() {
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\014params.proto\022\014exportParams\"I\n\014ExportPa"
       "rams\022\016\n\006IntVal\030\001 \001(\005\022\020\n\010FloatVal\030\002 \001(\002\022\027"
-      "\n\013ArrayOfData\030\004 \003(\002B\002\020\001b\006proto3"
+      "\n\013ArrayOfData\030\004 \003(\002B\002\020\001"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 111);
+      descriptor, 103);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "params.proto", &protobuf_RegisterTypes);
 }
@@ -129,6 +132,7 @@ ExportParams::ExportParams()
 ExportParams::ExportParams(const ExportParams& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
+      _has_bits_(from._has_bits_),
       arrayofdata_(from.arrayofdata_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&intval_, &from.intval_,
@@ -172,9 +176,13 @@ void ExportParams::Clear() {
   (void) cached_has_bits;
 
   arrayofdata_.Clear();
-  ::memset(&intval_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&floatval_) -
-      reinterpret_cast<char*>(&intval_)) + sizeof(floatval_));
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 3u) {
+    ::memset(&intval_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&floatval_) -
+        reinterpret_cast<char*>(&intval_)) + sizeof(floatval_));
+  }
+  _has_bits_.Clear();
   _internal_metadata_.Clear();
 }
 
@@ -188,11 +196,11 @@ bool ExportParams::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int32 IntVal = 1;
+      // optional int32 IntVal = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-
+          set_has_intval();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &intval_)));
@@ -202,11 +210,11 @@ bool ExportParams::MergePartialFromCodedStream(
         break;
       }
 
-      // float FloatVal = 2;
+      // optional float FloatVal = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(21u /* 21 & 0xFF */)) {
-
+          set_has_floatval();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &floatval_)));
@@ -261,13 +269,14 @@ void ExportParams::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 IntVal = 1;
-  if (this->intval() != 0) {
+  cached_has_bits = _has_bits_[0];
+  // optional int32 IntVal = 1;
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->intval(), output);
   }
 
-  // float FloatVal = 2;
-  if (this->floatval() != 0) {
+  // optional float FloatVal = 2;
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->floatval(), output);
   }
 
@@ -280,9 +289,9 @@ void ExportParams::SerializeWithCachedSizes(
       this->arrayofdata().data(), this->arrayofdata_size(), output);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+  if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+        _internal_metadata_.unknown_fields(), output);
   }
   // @@protoc_insertion_point(serialize_end:exportParams.ExportParams)
 }
@@ -294,13 +303,14 @@ void ExportParams::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 IntVal = 1;
-  if (this->intval() != 0) {
+  cached_has_bits = _has_bits_[0];
+  // optional int32 IntVal = 1;
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->intval(), target);
   }
 
-  // float FloatVal = 2;
-  if (this->floatval() != 0) {
+  // optional float FloatVal = 2;
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->floatval(), target);
   }
 
@@ -317,9 +327,9 @@ void ExportParams::SerializeWithCachedSizes(
       WriteFloatNoTagToArray(this->arrayofdata_, target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+  if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+        _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:exportParams.ExportParams)
   return target;
@@ -329,10 +339,10 @@ size_t ExportParams::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:exportParams.ExportParams)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+  if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+        _internal_metadata_.unknown_fields());
   }
   // repeated float ArrayOfData = 4 [packed = true];
   {
@@ -350,18 +360,20 @@ size_t ExportParams::ByteSizeLong() const {
     total_size += data_size;
   }
 
-  // int32 IntVal = 1;
-  if (this->intval() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->intval());
-  }
+  if (_has_bits_[0 / 32] & 3u) {
+    // optional int32 IntVal = 1;
+    if (has_intval()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->intval());
+    }
 
-  // float FloatVal = 2;
-  if (this->floatval() != 0) {
-    total_size += 1 + 4;
-  }
+    // optional float FloatVal = 2;
+    if (has_floatval()) {
+      total_size += 1 + 4;
+    }
 
+  }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -390,11 +402,15 @@ void ExportParams::MergeFrom(const ExportParams& from) {
   (void) cached_has_bits;
 
   arrayofdata_.MergeFrom(from.arrayofdata_);
-  if (from.intval() != 0) {
-    set_intval(from.intval());
-  }
-  if (from.floatval() != 0) {
-    set_floatval(from.floatval());
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 3u) {
+    if (cached_has_bits & 0x00000001u) {
+      intval_ = from.intval_;
+    }
+    if (cached_has_bits & 0x00000002u) {
+      floatval_ = from.floatval_;
+    }
+    _has_bits_[0] |= cached_has_bits;
   }
 }
 
@@ -425,6 +441,7 @@ void ExportParams::InternalSwap(ExportParams* other) {
   arrayofdata_.InternalSwap(&other->arrayofdata_);
   swap(intval_, other->intval_);
   swap(floatval_, other->floatval_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 

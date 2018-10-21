@@ -34,14 +34,33 @@ RUN  git clone https://github.com/protocolbuffers/protobuf.git && \
     make install  && \
     ldconfig
 
-WORKDIR /goToCPPExample
+# Install golang
+ENV GOLANG_VERSION 1.8.1
+RUN wget -O - https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-amd64.tar.gz \
+    | tar -v -C /usr/local -xz
+ENV GOPATH /go
+ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
+
+RUN go get -u github.com/golang/protobuf/protoc-gen-go
+
+WORKDIR /go/src/github.com/im7mortal/cToGoProtobufExample
 
 COPY . .
 
-RUN protoc --cpp_out=. params.proto
+# Generate CPP
+RUN protoc --cpp_out=src/. params.proto && mv src/params.pb.h include/params.pb.h
 
-#RUN find / | grep protobuf.so | grep .so && exit 1
+RUN g++ -c -Iinclude -std=c++11 src/params.pb.cc src/library.cpp `pkg-config --cflags --libs protobuf` && \
+    ar rcs libprotobufExample.a params.pb.o library.o
 
-RUN g++ -I. -std=c++11 params.pb.cc library.cpp main.cpp `pkg-config --cflags --libs protobuf`
+# For CPP only test uncomment next 2 rows
+#RUN g++ -Iinclude -std=c++11 main.cpp libprotobufExample.a `pkg-config --cflags --libs protobuf` && ./a.out; exit 1
 
-RUN ./a.out
+RUN cp libprotobufExample.a pkg/lib/. && cp include/library.h pkg/lib/.
+
+#RUN mkdir pkg/exportParams
+RUN protoc --go_out=pkg/exportParams/. params.proto
+RUN ls -l /go/src/github.com/im7mortal/cToGoProtobufExample/pkg/lib/
+RUN go install github.com/im7mortal/cToGoProtobufExample/cmd/protobuf
+
+RUN protobuf
