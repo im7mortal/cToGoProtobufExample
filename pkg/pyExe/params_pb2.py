@@ -17,9 +17,9 @@ _sym_db = _symbol_database.Default()
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='params.proto',
   package='exportParams',
-  syntax='proto2',
+  syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0cparams.proto\x12\x0c\x65xportParams\"I\n\x0c\x45xportParams\x12\x0e\n\x06IntVal\x18\x01 \x01(\x05\x12\x10\n\x08\x46loatVal\x18\x02 \x01(\x02\x12\x17\n\x0b\x41rrayOfData\x18\x04 \x03(\x02\x42\x02\x10\x01')
+  serialized_pb=_b('\n\x0cparams.proto\x12\x0c\x65xportParams\"a\n\x0c\x45xportParams\x12\x0e\n\x06IntVal\x18\x01 \x01(\x05\x12\x10\n\x08\x46loatVal\x18\x02 \x01(\x02\x12\x16\n\x0e\x41rrayOfStrings\x18\x03 \x03(\t\x12\x17\n\x0b\x41rrayOfData\x18\x04 \x03(\x02\x42\x02\x10\x01\x62\x06proto3')
 )
 
 
@@ -47,7 +47,14 @@ _EXPORTPARAMS = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='ArrayOfData', full_name='exportParams.ExportParams.ArrayOfData', index=2,
+      name='ArrayOfStrings', full_name='exportParams.ExportParams.ArrayOfStrings', index=2,
+      number=3, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ArrayOfData', full_name='exportParams.ExportParams.ArrayOfData', index=3,
       number=4, type=2, cpp_type=6, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -61,12 +68,12 @@ _EXPORTPARAMS = _descriptor.Descriptor(
   ],
   serialized_options=None,
   is_extendable=False,
-  syntax='proto2',
+  syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
   serialized_start=30,
-  serialized_end=103,
+  serialized_end=127,
 )
 
 DESCRIPTOR.message_types_by_name['ExportParams'] = _EXPORTPARAMS

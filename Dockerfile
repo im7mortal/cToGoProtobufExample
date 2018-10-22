@@ -51,7 +51,7 @@ WORKDIR /go/src/github.com/im7mortal/cToGoProtobufExample
 COPY . .
 
 # Remove all protobuf files from host
-RUN find . -name "*.pb.*" -type f -delete
+RUN find . -name "*.pb.*" -type f -delete && find . -name "*_pb2.py" -type f -delete
 
 # Generate CPP
 RUN protoc --cpp_out=src/. params.proto && mv src/params.pb.h include/params.pb.h
@@ -67,5 +67,7 @@ RUN cp libprotobufExample.a pkg/lib/. && cp include/library.h pkg/lib/.
 #RUN mkdir pkg/exportParams
 RUN protoc --go_out=pkg/exportParams/. params.proto
 RUN go install github.com/im7mortal/cToGoProtobufExample/cmd/protobuf
+
+RUN protoc --python_out=pkg/pyExe params.proto
 
 RUN protobuf
